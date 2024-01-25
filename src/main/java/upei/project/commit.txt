@@ -1,0 +1,345 @@
+** UPDATE
+    NOTES:
+        I believe not using updateBoard in RSA is causing illegal fences to be allowed
+
+** UPDATE
+    BFSStrategy:
+        Extends the BFS class with a few extra methods using BFS for best move, and either places a random fence 
+        or makes a optimal move from BFS
+        Documented and made test cases
+
+    BFS:
+        Added a reconstruct path method for BFSStrategy
+        Documented
+
+    Runner:
+        Implemented BFSvsBFS simulation
+
+    Player:
+        Changed .equals to compare by name 
+
+** NINTH UPDATE
+    Made CFS strategy to place the closest fence to block the opponent.
+    Add minor testcases in CFSTest
+    Organized RSAPlayer to make it easier to implement
+
+    TODO:
+            Finish making test cases
+            Update documentation
+
+** EIGHTH UPDATE
+    Completed FenceTest class
+    Fixed minor logical bugs in Fence class
+    Created RSA class and implemented its strategy in runner class
+    Working on BoardTest Class
+
+    TODO:
+        Finish making test cases
+        Complete one more strategy
+        Update documentation
+
+
+** SEVENTH UPDATE
+    Player:
+        Added toString 
+        Fixed clone contructor getX, getY
+
+    Board:
+        Added toString
+        Removed Player from paramaters, working with currentPlayer and currentOpp methods instead 
+
+    BFS:
+        Fixed minor bugs
+
+    TODO:
+        Will update documentation
+
+** SIXTH UPDATE
+    Updated and completed PlayerTest class to run tests for Player class.
+    Made new test cases for Fence class in FenceTest class.
+    Started converting comments into javadoc style documentation, an example can be found in Main class.
+    Made minor changes to Board.isOver method inorder to notify the player has won the game.
+    Made minor changes in Runner.pvp method inorder to exit the game normally when the player has won the game or wants to stop the game.
+    Introduced RSA player strategy class, still in development.
+
+    Todo
+        Make Min max search algorithm
+        Need to make test cases for the rest of the classes
+        Did not found any serious bugs yet.
+        Proper documentation of code in javadoc format.
+
+
+** FIFTH UPDATE
+    General:
+        No major changes, just wanted to move changes in here before refactoring board to adopt using getCurrentPlayer and getCurrentOpp instead of passing p and opp everywheres
+        Updated decorators in classes
+        Added MCTS, just wrote no testing done, want to try to refactor paramaters for board first
+        Made runner for the different play styles(pvp, pvMCTS, pvMinimax, pvABP)
+        Could edit heurestics for MCTS and implement AI difficulty levels, or choose states with lower win ratios for lower difficulties
+        Could use getMoves() for Player move validation (if state.getMoves().contains(goal) return true)
+
+    Board:
+        Added nicer ref vars for methods for pDiagsOpp pJumpsOpp, oppNeighbours
+        Store p and opp in the board instances now, added methods for working with them
+        Moved some search specific methods to their respective search classes
+
+    BFS:
+        Moved getMoves into here, only place it's accessed
+    
+    Node:
+        Made this a parent class for shared data between MCTSNode and BFSNode, kinda unecessary but demonstrates inheretence and abstract class for project reqs
+        
+    TODO:
+        Need to make test cases to ensure the functionality for rest of the classes.
+        Did not find any logical bugs in the code yet, need to play the game even more in different scenerios to test.
+        Make Min max search algorithm
+        Movement appears to be working fine for all scenearios 
+
+**FOURTH UPDATE
+    Updated methods in Fence class, Board class and Main class and also created minor methods inorder to emulate the game in a 17 by 17 matrix.
+    Made test cases for player class.
+    Made the GUI of the board look better.
+    Fixed the bug of printing horizontal rows and fixed other discovered bugs.
+    Added a little more validation methods and updated existing methods.
+    Fixed and updated the code so that the Quoridor class simulates all the rules and features of the game.
+
+    TODO
+        Need to make test cases to ensure the functionality for rest of the classes.
+        Did not find any logical bugs in the code yet, need to play the game even more in different scenerios to test.
+        Make Min max search algorithm
+
+**THIRD UPDATE
+    Removed Player1 and Player2
+    Refactored how players are made in Main
+    The two sub classes of player  did not have any methods that were being used and therefore redundant
+    Chopped out unused methods in player
+    Fixed fence not blocking moves, logic error in Board.fenceBlocksMove()
+
+    BUGS
+        not printing horozontal rows correctly, just need to find out how to underline a char in java 
+
+    TODO
+        All thats left is the three adversarial searches these could be:
+        MiniMax (Fidns best move assuming optimal move will be made by oppoment)
+        Alpha Beta Pruning (Basically minimax, but optimized)
+        Monte Carlo Tree Search (Never worked with before, will require some extra work to develop)
+
+**SECOND UPDATE
+    Tested and debugged fence classes and implementation
+    Switched appproach on Solve, now BFS
+    Fixed some bugs in Board and Fence logic regarding getting possible moves and fences
+    Added constructors for Player (needed Player(Player) constructor for BFS)
+    Updated board to print fences
+    Added a check to make sure fences are the legal size in Fence
+
+    BUGS 
+    fence not blocking moves
+    horozontal fence not displaying correctly
+
+**FIRST UPDATE
+    Refactored game loop in Main.
+    Updated Board class.
+    Added a couple Player methods and vars.
+    Added Fence, BFS DFS Runner and Node classes, untested though.
+    Tested up down left right double jump movements, working as expected.
+    Closed input scanner in Main...
+    Added named input for standard moves, and also accepts coordinate input for double jump and diagonal moves which would be more difficult typing names for.
+
+    Example I/O:
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P1 0  0  0  0
+    0  0  0  0  P2 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [5, 4]):
+    left
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  P1 0  0  0  0  0
+    0  0  0  0  P2 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [6, 4]):
+    up
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  P1 P2 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [5, 3]):
+    5,5
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P2 P1 0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [5, 4]):
+    up  
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P2 0  0  0  0
+    0  0  0  0  0  P1 0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [5, 5]):
+    up
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P2 P1 0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [4, 4]):
+    down
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  P1 0  0  0
+    0  0  0  0  P2 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [4, 5]):
+    left
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P1 0  0  0  0
+    0  0  0  0  P2 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [5, 4]):
+    right
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P1 0  0  0  0
+    0  0  0  0  0  P2 0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [4, 4]):
+    down
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P1 P2 0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [5, 5]):
+    5,3
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  P2 P1 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [5, 4]):
+    up
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P1 0  0  0  0
+    0  0  0  P2 0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [5, 3]):
+    up  
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  P2 P1 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [4, 4]):
+    down
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  P2 0  0  0  0  0
+    0  0  0  0  P1 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [4, 3]):
+    right
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P2 0  0  0  0
+    0  0  0  0  P1 0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    -------------------------
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  P2 0  0  0  0
+    0  0  0  P1 0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [4, 4]):
+    left
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  P2 0  0  0  0  0
+    0  0  0  P1 0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p1's turn (currently at [5, 3]):
+    3,3
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  P1 0  0  0  0  0
+    0  0  0  P2 0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    0  0  0  0  0  0  0  0  0
+    p2's turn (currently at [4, 3]):
+    down
